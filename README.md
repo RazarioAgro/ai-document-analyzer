@@ -23,5 +23,3 @@
    cd pet-project
 
    git branch -M main
-git remote add origin https://github.com/RazarioAgro/ai-document-analyzer.git
-git push -u origin main
