@@ -1,0 +1,27 @@
+
+services:
+  # Наш сервис базы данных
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ai_analyzer
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Наше FastAPI приложение
+  web:
+    build: . # Собирает образ из нашего Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db # Ждет, пока запустится база данных
+    environment:
+      # Обрати внимание, здесь 'db' вместо 'localhost', потому что они в одной сети Docker
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@db:5432/ai_analyzer
+
+volumes:
+  postgres_data:

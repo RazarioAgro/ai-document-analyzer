@@ -1,0 +1,7 @@
+```text
+__pycache__/
+.env
+.venv/
+.idea/
+.vscode/
+*.log
